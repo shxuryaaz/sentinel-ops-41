@@ -52,9 +52,13 @@ const StatusBar = () => {
               {m.label}:
             </span>
             <span
-              className={`text-[9px] font-medium ${
-                m.color ? `text-${m.color}` : "text-foreground"
-              }`}
+              className="text-[9px] font-medium"
+              style={{
+                color: m.color === "sentinel-red" ? "hsl(0, 70%, 50%)" :
+                       m.color === "sentinel-amber" ? "hsl(40, 80%, 50%)" :
+                       m.color === "sentinel-green" ? "hsl(145, 60%, 40%)" :
+                       "hsl(var(--foreground))"
+              }}
             >
               {m.value}
             </span>
