@@ -124,6 +124,13 @@ const AnalysisConsole = () => {
   );
 };
 
+const COLOR_MAP: Record<string, string> = {
+  "sentinel-red": "hsl(0, 70%, 50%)",
+  "sentinel-amber": "hsl(40, 80%, 50%)",
+  "sentinel-green": "hsl(145, 60%, 40%)",
+  "sentinel-cyan": "hsl(185, 60%, 45%)",
+};
+
 function MetricBar({
   label,
   value,
@@ -140,6 +147,7 @@ function MetricBar({
   const pct = (value / max) * 100;
   const segments = 20;
   const filled = Math.floor((pct / 100) * segments);
+  const fillColor = COLOR_MAP[color] || COLOR_MAP["sentinel-cyan"];
 
   return (
     <div>
@@ -153,9 +161,10 @@ function MetricBar({
         {Array.from({ length: segments }).map((_, i) => (
           <div
             key={i}
-            className={`h-2 flex-1 ${
-              i < filled ? `bg-${color}` : "bg-sentinel-panel-border"
-            }`}
+            className="h-2 flex-1"
+            style={{
+              backgroundColor: i < filled ? fillColor : "hsl(220, 5%, 15%)",
+            }}
           />
         ))}
       </div>
